@@ -33,7 +33,7 @@ A systematic approach would be to perform a grid search across a custom range of
 Code to perform this grid search is contained in the image below.
 
 <img src="src/images/grid_search.png" alt="ARIMA grid search function"
-        width="250" height="350">
+        width="450" height="400">
 
 In practice, performing the grid search on even a small range of values was too time-expensive on my machine; I opted to use the auto_arima recommendations, but with limited trial and error on low values of p to find the best fit.
 
@@ -59,13 +59,13 @@ The trade volume data remains relatively constant throughout the five years, wit
 
 The auto_arima function identified optimal (p,d,q) values as follows:
 
-<img src="src/images/gsk_D_adj_close_auto_arima.png" alt="pmdarima auto_arima read-out for GSK daily adjusted close price" width="300" height="150">
+<img src="src/images/gsk_D_adj_close_auto_arima.png" alt="pmdarima auto_arima read-out for GSK daily adjusted close price" width="350" height="200">
 
 The auto_arima function identified optimal (p,d,q) values of ARIMA(0,1,0), which is equivalent to a random walk. The prediction equation can be expressed as: X<sub>t</sub> = X<sub>t-1</sub> + ε<sub>t</sub>, where t represents the time period, and ε captures random noise.
 
 Pandas' in-built autocorrelation plot can also be used to determine a suitable value for p (AR order), by identifying the highest lag value at which the data still exhibits a strong correlation:
 
-<img src="src/images/gsk_D_adj_close_autocorrelation.png" alt="pandas autocorrelation plot for GSK daily adjusted close price" width="400" height="350">
+<img src="src/images/gsk_D_adj_close_autocorrelation.png" alt="pandas autocorrelation plot for GSK daily adjusted close price" width="450" height="350">
 
 The solid lines (green) either side of the central solid line (blue) represent the 95% confidence interval - values outside of this range may be considered statistically significant. The dashed lines (grey) are two standard errors above and below the central line (y=0) (i.e., the 99% confidence bands) and demarcate the range within which correlation could be due to random chance.
 
@@ -81,11 +81,11 @@ However, it can still be useful to apply the concept of train and test sets; the
 
 The ARIMA(0,1,0) order achieved root mean squared error (RMSE) and r-squared (R2) values as follows:
 
-<img src="src/images/gsk_D_adj_close_arima010.png" alt="GSK daily adjusted close ARIMA(0,1,0)" width="200" height="50">
+<img src="src/images/gsk_D_adj_close_arima010.png" alt="GSK daily adjusted close ARIMA(0,1,0)" width="250" height="75">
 
 For comparison, the ARIMA(10,1,0) model results are shown below.
 
-<img src="src/images/gsk_D_adj_close_arima1010.png" alt="GSK daily adjusted close ARIMA(10,1,0)" width="200" height="50">
+<img src="src/images/gsk_D_adj_close_arima1010.png" alt="GSK daily adjusted close ARIMA(10,1,0)" width="250" height="75">
 
 Notably, the ARIMA(10,1,0) model is not far behind the optimal model. The optimal model achieved RMSE of 15.64, versus ARIMA(10,1,0)'s 15.79, and the R2 values matched.
 
@@ -99,7 +99,7 @@ The R2 value, meanwhile, indicates that the 94% of the variation in the dependen
 
 The figure below plots the predicted (red) and true (green) values as evaluated on the test set.
 
-<img src="src/images/gsk_D_adj_close_arima.png" alt="ARIMA Predictions vs. True GSK Daily Adjusted Close Prices" width="700" height="350">
+<img src="src/images/gsk_D_adj_close_arima.png" alt="ARIMA Predictions vs. True GSK Daily Adjusted Close Prices" width="700" height="400">
 
 ## TBIL
 
@@ -114,7 +114,7 @@ Since TBIL has a much different profile to GSK, it will be interesting to the co
 The figure below depicts the daily close price (blue, left-hand y-axis) and adjusted close price (red, right-hand y-axis) in the top plot, and daily trade volume (green) in the bottom plot.
 
 <img src="src/images/tbil_D_close_adj_close_volume.png" alt="TBIL Daily Price and Volume (Aug 2022 - Jan 2024)"
-        width="700" height="350">
+        width="700" height="600">
 
 The difference with the GSK time series is striking. In blue, we can observe the cyclical nature of close prices - a consequence of regular dividend payments - while in red, the adjusted close price can be seen to grow at an apparent constant rate over time.
 
@@ -124,15 +124,15 @@ Again in contrast to the GSK time series, the trade volume for TBIL shows growth
 
 The auto_arima function identified optimal (p,d,q) values as follows:
 
-<img src="src/images/tbil_D_close_adj_close_auto_arima.png" alt="pmdarima auto_arima read-out for TBIL daily adjusted close price"
-        width="300" height="250">
+<img src="src/images/tbil_D_adj_close_auto_arima.png" alt="pmdarima auto_arima read-out for TBIL daily adjusted close price"
+        width="450" height="250">
 
 The optimal (p,d,q) values of (3,2,1) diverge markedly from GSK's random walk. Here, recent observations are now directly incorporated via the autoregressive (AR) value of 3, and past errors also feature more prominently with the q value (MA, moving average) of 1.
 
 The auto_arima function further displays statistical analysis of the model as follows:
 
-<img src="src/images/tbil_D_close_adj_close_sarimax.png" alt="pmdarima sarimax read-out for GSK daily adjusted close price"
-        width="250" height="300">
+<img src="src/images/tbil_D_adj_close_sarimax.png" alt="pmdarima sarimax read-out for GSK daily adjusted close price"
+        width="450" height="300">
 
 The AR intercepts (ar.L1, ar.L2, and ar.L3) have negative values, which indicates that past observations have suppressing effect on the current value: a high value would lead to a low value, and vice versa.
 
@@ -140,7 +140,7 @@ The high negative MA value (-0.9492) indicates that the model features strong co
 
 The autocorrelation plot is displayed in the figure below.
 
-<img src="src/images/tbil_D_adj_close_autocorrelation.png" alt="pandas autocorrelation plot for TBIL daily adjusted close price" width="400" height="350">
+<img src="src/images/tbil_D_adj_close_autocorrelation.png" alt="pandas autocorrelation plot for TBIL daily adjusted close price" width="450" height="350">
 
 The smooth initial descent of the curve (red) reinforces the greater importance of past observations to this model, as compared with the steep drop shown in the GSK autocorrelation plot.
 
@@ -150,7 +150,7 @@ The ARIMA(3,2,1) order achieved root mean squared error (RMSE) of 0.01, and r-sq
 
 The plot of the true and predicted adjusted price figures reveal this to be a highly linear relationship. The greater accuracy of the model's predictions is in line with the considerable simplicity of the time series, and differs starkly from the trends exhibited by the GSK adjusted close time series.
 
-<img src="src/images/tbil_D_adj_close_arima.png" alt="ARIMA Predictions vs. True TBIL Adjusted Close Prices" width="700" height="350">
+<img src="src/images/tbil_D_adj_close_arima.png" alt="ARIMA Predictions vs. True TBIL Adjusted Close Prices" width="700" height="400">
 
 ## Acknowledgements
 
