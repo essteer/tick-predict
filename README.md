@@ -1,5 +1,7 @@
 # Tick Predict
 
+![GitHub last commit](https://img.shields.io/github/last-commit/essteer/tick-predict?color=green) ![GitHub License](https://img.shields.io/github/license/essteer/tick-predict?color=blue) ![GitHub top language](https://img.shields.io/github/languages/top/essteer/tick-predict?color=red)
+
 ## Overview
 
 Tick Predict is a project to explore the predictive power of ARIMA (AutoRegressive Integrated Moving Average) models applied to time series price data. Securities markets are a common focus of predictive machine learning algorithms, since a model able to outperform the market in forecasting future stock price movements would offer potentially lucrative rewards.
