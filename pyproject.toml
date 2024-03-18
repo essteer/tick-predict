@@ -1,0 +1,39 @@
+[project]
+name = "tick-predict"
+dynamic = ["version"]
+description = "Stock and ETF price forecasts with ARIMA models"
+authors = [{ name = "Elliott Steer", email = "essteer@pm.me" }]
+requires-python = ">=3.6"
+license = { file = "LICENSE" }
+readme = "README.md"
+keywords = ["ARIMA", "predictions", "stock prices"]
+classifiers = [
+    "Operating System :: OS Independent",
+    "Natural Language :: English",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.6",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+
+[project.optional-dependencies]
+jupyter = [
+    "numpy",
+    "pandas",
+    "plotly",
+    "pmdarima",
+    "scipy",
+    "sklearn",
+    "statsmodels",
+]
+
+[project.urls]
+documentation = "https://github.com/essteer/tick-predict/blob/main/README.md"
+repository = "https://github.com/essteer/tick-predict"
+issues = "https://github.com/essteer/tick-predict/issues"
